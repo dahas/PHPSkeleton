@@ -6,4 +6,4 @@ use App\Foo;
 
 $foo = new Foo();
 
-echo $foo->add(123, 456);
+echo $foo->add(123, 456); 
