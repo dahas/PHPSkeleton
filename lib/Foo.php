@@ -1,8 +1,11 @@
 <?php declare(strict_types=1);
 
 namespace App;
+use Sources\Tools;
 
 class Foo {
+
+    use Tools;
 
     public function __construct()
     {
@@ -10,6 +13,8 @@ class Foo {
 
     public function add(int $a, int $b) : int
     {
-        return $a + $b;
+        $af = $this->filterInput($a);
+        $bf = $this->filterInput($b);
+        return $af + $bf;
     }
 }
