@@ -34,7 +34,7 @@ Follow the instructions.
 
 Open the composer.json file and add the "autoload" section to it. Provide the namespace and the directory of your class files.
 
-Below is an example with a namespace "App" and a path "lib".
+Below is an example with a namespace "PHPSkeleton\App" and a path "lib".
 
 ```
 // composer.json
@@ -42,8 +42,8 @@ Below is an example with a namespace "App" and a path "lib".
 {
     "autoload": {
         "psr-4": {
-            "App\\": "lib/",
-            // Add your namespaces here
+            "PHPSkeleton\\App\\": "lib/",
+            // Add another namespaces here
         }
     }
 }
