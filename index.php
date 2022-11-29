@@ -2,7 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use App\Foo;
+use PHPSkeleton\App\Foo;
 
 $foo = new Foo();
 

@@ -1,8 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests;
-
-use App\Foo;
+use PHPSkeleton\App\Foo;
 use PHPUnit\Framework\TestCase;
 
 class FooTest extends TestCase

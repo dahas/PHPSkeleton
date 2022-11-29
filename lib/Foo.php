@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace App;
-
-use Sources\Tools;
+namespace PHPSkeleton\App;
+use PHPSkeleton\Sources\Tools;
 
 class Foo {
 

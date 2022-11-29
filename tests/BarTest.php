@@ -1,8 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests;
-
-use App\Bar;
+use PHPSkeleton\App\Bar;
 use PHPUnit\Framework\TestCase;
 
 class BarTest extends TestCase

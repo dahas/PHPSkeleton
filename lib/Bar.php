@@ -1,10 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App;
+namespace PHPSkeleton\App;
+use PHPSkeleton\Sources\Barista;
 
-use Sources\BarIF;
-
-class Bar implements BarIF
+class Bar implements Barista
 {
     private static ?Bar $instance = null;
 

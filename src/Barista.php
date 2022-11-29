@@ -1,8 +1,8 @@
 <?php
 
-namespace Sources;
+namespace PHPSkeleton\Sources;
 
-interface BarIF
+interface Barista
 {
     public function setVariable($name, $var);
     public function getHtml($template);
