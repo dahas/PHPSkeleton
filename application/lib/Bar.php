@@ -1,17 +1,19 @@
 <?php declare(strict_types=1);
 
 namespace PHPSkeleton\App;
-use PHPSkeleton\Sources\Barista;
 
-class Bar implements Barista
-{
-    private static ?Bar $instance = null;
+use PHPSkeleton\Sources\interfaces\Bars;
 
-    private function __construct()
+class Bar implements Bars {  // <-- Implementing the interface
+    private static ? Bar $instance = null;
+
+
+    private function __construct()  // <-- The constructor of a singleton class must be at least protected
     {
     }
 
-    public static function getInstance(): Bar
+
+    public static function getInstance() : Bar  // <-- Create an instance if none yet existing
     {
         if (self::$instance === null) {
             self::$instance = new self();
@@ -20,24 +22,19 @@ class Bar implements Barista
         return self::$instance;
     }
 
-    public function compare(string|int $a, string|int $b) : bool
+
+    public function compare(string|int $a, string|int $b): bool
     {
         return $a === $b;
     }
 
-	/**
-	 * @param mixed $name
-	 * @param mixed $var
-	 * @return mixed
-	 */
-	public function setVariable($name, $var) {
-	}
-	
-	/**
-	 *
-	 * @param mixed $template
-	 * @return mixed
-	 */
-	public function getHtml($template) {
-	}
+
+    public function setVariable($name, $var)  // <-- Implentation required from interface
+    {
+    }
+
+
+    public function getHtml($template)  // <-- Implentation required from interface
+    {
+    }
 }

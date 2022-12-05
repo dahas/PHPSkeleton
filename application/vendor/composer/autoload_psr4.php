@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'PHPSkeleton\\Sources\\' => array($baseDir . '/src'),
+    'PHPSkeleton\\Services\\' => array($baseDir . '/services'),
     'PHPSkeleton\\App\\' => array($baseDir . '/lib'),
 );

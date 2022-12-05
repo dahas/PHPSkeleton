@@ -10,6 +10,7 @@ class ComposerStaticInit5d67038eb9654b79a22400a5c548e80b
         'P' => 
         array (
             'PHPSkeleton\\Sources\\' => 20,
+            'PHPSkeleton\\Services\\' => 21,
             'PHPSkeleton\\App\\' => 16,
         ),
     );
@@ -18,6 +19,10 @@ class ComposerStaticInit5d67038eb9654b79a22400a5c548e80b
         'PHPSkeleton\\Sources\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'PHPSkeleton\\Services\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/services',
         ),
         'PHPSkeleton\\App\\' => 
         array (

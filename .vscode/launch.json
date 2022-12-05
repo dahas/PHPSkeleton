@@ -20,7 +20,7 @@
             "name": "PHP App",
             "type": "php",
             "request": "launch",
-            "program": "${workspaceFolder}\\index.php",
+            "program": "${workspaceFolder}\\public\\index.php",
             "args": [],
             "externalConsole": false,
             "port": 9003
