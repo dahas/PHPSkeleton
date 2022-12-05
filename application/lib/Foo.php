@@ -12,7 +12,7 @@ class Foo extends ParentClass
     use Tools;  // <-- Enable the usage of methods of the trait
 
 
-    #[Inject('DataService')]  // <-- Dependency injection with an Attribute
+    #[Inject('DataService')]  // <-- Dependency injection through an Attribute
     protected $DataService;
 
 

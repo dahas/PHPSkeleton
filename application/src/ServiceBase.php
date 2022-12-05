@@ -14,7 +14,6 @@ class ServiceBase
     public function __construct()
     {
         $rc = new ReflectionClass(get_class($this));
-        $attr = $rc->getAttributes();
         foreach($rc->getAttributes() as $attribute) {
             foreach($attribute->newInstance() as $name => $property) {
                 $this->$name = $property;

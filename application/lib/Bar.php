@@ -4,11 +4,11 @@ namespace PHPSkeleton\App;
 
 use PHPSkeleton\Sources\interfaces\Bars;
 
-class Bar implements Bars {  // <-- Implementing the interface
+class Bar implements Bars {  // <-- Implementing an interface
     private static ? Bar $instance = null;
 
 
-    private function __construct()  // <-- The constructor of a singleton class must be at least protected
+    private function __construct()  // <-- The constructor of a singleton class must be protected at least
     {
     }
 
