@@ -1,8 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace PHPSkeleton\Sources;
 
-use PHPSkeleton\App\Foo;
 use ReflectionClass;
 
 class ServiceBase
