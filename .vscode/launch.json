@@ -1,10 +1,9 @@
 {
     // DEBUG CONFIGURATION FILE
-
     "version": "0.2.0",
     "configurations": [
 
-        //^^ Debug currently open PHP file
+        //// Debug currently open PHP file
         {
             "name": "PHP File",
             "type": "php",
@@ -15,18 +14,18 @@
             "port": 9003
         },
 
-        //^^ Debug PHP App
+        //// Debug PHP App
         {
             "name": "PHP App",
             "type": "php",
             "request": "launch",
-            "program": "${workspaceFolder}\\public\\index.php",
+            "program": "${workspaceFolder}/public/index.php",
             "args": [],
             "externalConsole": false,
             "port": 9003
         },
 
-        //^^ Debug currently open JS file
+        //// Debug currently open JS file
         {
             "name": "JS File",
             "type": "node",
@@ -37,12 +36,12 @@
             ]
         },
 
-        //^^ Debug JS App
+        //// Debug JS App
         {
             "name": "JS App",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceFolder}\\index.js",
+            "program": "${workspaceFolder}/index.js",
             "skipFiles": [
                 "<node_internals>/**"
             ]

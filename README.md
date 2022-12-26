@@ -1,97 +1,127 @@
-# How to init a PHP project from scratch
+# Set up a LAMP Stack on Windows and initialise a PHP project from scratch
 
 **Environment:**
 - Windows OS
 - Visual Studio Code
-- Xampp
+- WSL
+- Ubuntu 22.04
+- NodeJS
+- PHP 8.1
+- MySQL 8
+- PHPUnit
+- Composer
+- Git
 
-### Download and install Xampp
+### Install WSL
+Open Powershell as Administrator and run:
 
-Get it from here: https://www.apachefriends.org/
+```
+PS wsl --install
+```
 
-Do not install Xampp into your Program Files folder! Instead install it directly on your main drive. So you have "C:\xampp\\".
+### Install Ubuntu:
+Open Microsoft Store and search for "Ubuntu". Choose 22.xx or higher, download it, then click open. 
+
+Follow the instructions in the terminal.
+
+Enable SystemD:
+
+	~$ sudo nano /etc/wsl.conf 
+
+Enter:
+```
+[boot]
+systemd=true
+```
+Exit an save file.
+
+### Update Packages
+```
+~$ sudo apt update
+~$ sudo apt full-upgrade
+```
+
+### Install NodeJS
+```
+~$ curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - &&\
+ > sudo apt-get install -y nodejs
+```
+
+### Install PHP 8.1
+```
+~$ sudo apt install --no-install-recommends php8.1
+~$ sudo apt-get install -y php8.1-cli php8.1-common php8.1-mysql php8.1-zip php8.1-gd php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath
+```
 
 ### Download and install Composer
-
-Available here: https://getcomposer.org/download/
-
-If problems with the Windows installer occur, you can follow the *Command-line installation*.
-
-### Create a root folder for your project
+Download installer and verify hash:
 ```
-$ mkdir your_project
-```
-
-### Create composer.json file
-The composer.json file must be in the root directory of your project. Create one with the command below.
-```
-$ cd your_project
-$ composer init
-```
-Follow the instructions.
-
-### Extend composer.json file
-
-Open the composer.json file and add the "autoload" section to it. Provide the namespace and the directory of your class files.
-
-Below is an example with a namespace "PHPSkeleton\App" and a path "lib".
-
-```
-// composer.json
-
-{
-    "autoload": {
-        "psr-4": {
-            "PHPSkeleton\\App\\": "lib/",
-            // Add another namespaces here
-        }
-    }
-}
+~$ curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
+~$ HASH=`curl -sS https://composer.github.io/installer.sig`
+~$ echo $HASH
+~$ php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+~$ sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 ```
 
-### Update autoloader
+### Install MySQL
 ```
-$ composer update
+~$ sudo apt-get install -y mysql-server php-mysql
 ```
-Run this command whenever you´ve added a namespace.
+Important: Alter the root user first:
+```
+~$ sudo mysql    // Open MySQL prompt
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';    // Important step!
+mysql> exit
+```
+Then run secure installation:
+```
+~$ mysql_secure_installation
+    > Validate Password component? No
+    > Change Root Password? No
+    > Remove anonymous users? Yes		
+    > Disallow Remote Login? Yes
+    > Remove test database? Yes
+    > Reload Provileg Tables? Yes
+```
 
-### Enable autoloader
-Assuming that *index.php* is the entry point of your app, add the following line at the very begining:
+### Install PHPUnit
 ```
-// index.php
-
-require __DIR__ . '/vendor/autoload.php';
+~$ wget -O phpunit https://phar.phpunit.de/phpunit-9.phar
+~$ chmod +x phpunit
+~$ ./phpunit --version
 ```
 
-### Verify the PHPUnit testing framework
-PHPUnit usually comes with Xampp. You can verify it by running this command:
+### Create a root folder for your projects
 ```
-$ phpunit --version
+~$ mkdir dev
+~$ sudo chmod -R 777 dev
 ```
-If you encounter an error, check if the Windows PATH variable is set:
-**C:\xampp\phpunit\\**
 
-If the PATH varaible is there and the error remains, please follow the steps below:
-
-- Download the latest PHPUnit **phar** file from here https://phpunit.de/index.html.
-- Rename it to **phpunit.phar** and place it in your Xampps "php" folder.
-- Modify the last line in **phpunit.bat** which you find in the "php" folder inside your Xampp directory. Modify it, so it looks like this: 
-    ```
-    // c:\xampp\php\phpunit.bat
-
-    "%PHPBIN%" "C:\xampp\php\phpunit.phar" %*
-    ```
-    Try again:
-    ```
-    $ phpunit --version
-    ```
-You should see:
-*PHPUnit x.x.xx by Sebastian Bergmann and contributors.*
-
-### Create a "tests" folder in the document root
+### Create a folder for your Project
 ```
-$ mkdir tests
+~$ cd dev
+~$ mkdir your_project
+~$ git clone https://github.com/dahas/PHPSkeleton.git
 ```
+
+### Install XDebug
+```
+~$ php -S localhost:2400 -t public/
+```
+- Open `localhost:2400/info.php` in Web browser.
+- Take a note of the path to the PHP.ini file. You´ll need it later.
+- Copy everything and paste it here: https://xdebug.org/wizard
+- Follow the instructions.
+
+### Modify composer.json file
+When ever you add or modify a path in `composer.json` you have to update the autoloader:
+```
+~$ cd application
+~$ composer update
+~$ cd ..
+```
+
+### Unit Testing
 Put files you want to be tested into this folder. Add the suffix "*Test.php" to the file and "*Test" to the class name. 
 
 PHPUnit tutorial: https://startutorial.com/view/phpunit-beginner-part-1-get-started
@@ -113,7 +143,7 @@ In the root folder of your project create a a file named **phpunit.xml** and pas
 ```
 Next, open the VSCode settings, search for "phpunit" and add the path to the phar file:
 
-**Path to the PHPUnit binary: "C:\xampp\php\phpunit.phar"**
+**Path to the PHPUnit binary: "~/phpunit.phar"**
 
 ### Running the tests 
 Now you can execute your tests either by entering the following commands in the terminal ...
@@ -123,21 +153,7 @@ $ phpunit tests --testdox  // Test all files in tests folder
 ```
 or by using the **VSCode Panel** to the left of your screen.
 
-### Download and install XDebug
-
-Follow this instruction: https://github.com/xdebug/vscode-php-debug
-
-Add the following section to your php.ini:
-```
-// c:\xampp\php\php.ini
-
-[XDebug]
-xdebug.mode=debug
-xdebug.remote_enable=on
-xdebug.start_with_request=yes
-zend_extension=xdebug
-```
-
+### Set up VSCode for Debugging
 Create a configuration file for the debugger in VSCode and replace its content with the following:
 ```
 // .vscode/launch.json
@@ -162,7 +178,7 @@ Create a configuration file for the debugger in VSCode and replace its content w
             "name": "PHP App",
             "type": "php",
             "request": "launch",
-            "program": "${workspaceFolder}\\index.php",
+            "program": "${workspaceFolder}/public/index.php",
             "args": [],
             "externalConsole": false,
             "port": 9003
@@ -184,7 +200,7 @@ Create a configuration file for the debugger in VSCode and replace its content w
             "name": "JS App",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceFolder}\\index.js",
+            "program": "${workspaceFolder}/public/index.js",
             "skipFiles": [
                 "<node_internals>/**"
             ]
