@@ -209,3 +209,10 @@ Create a configuration file for the debugger in VSCode and replace its content w
     ]
 }
 ```
+
+### GIT
+Maybe you are asked to provide a name and an email address of your Git account:
+```
+~$ git config --global user.name "your_name"
+~$ git config --global user.email "your_email"
+```
