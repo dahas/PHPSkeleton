@@ -1,9 +1,9 @@
 # Set up a LAMP Stack on Windows and initialise a PHP project from scratch
 
 **Environment:**
-- Windows OS
-- Visual Studio Code
-- WSL
+- Windows 10/11
+- Microsoft VS Code
+- WSL2
 - Ubuntu 22.04
 - NodeJS
 - PHP 8.1
@@ -12,24 +12,25 @@
 - Composer
 - Git
 
-### Install WSL
-Open Powershell as Administrator and run:
+<hr>
 
+## Step by Step Guide
+
+### Install WSL
+
+Open Powershell as Administrator and run:
 ```
 PS wsl --install
 ```
 
 ### Install Ubuntu:
-Open Microsoft Store and search for "Ubuntu". Choose 22.xx or higher, download it, then click open. 
 
-Follow the instructions in the terminal.
+Open Microsoft Store and search for "Ubuntu". Choose 22.04 (or higher). Download it, then click open. Follow the instructions in the terminal.
 
-Enable SystemD:
-
-	~$ sudo nano /etc/wsl.conf 
-
-Enter:
+To enable SystemD create `wsl.conf` and enter this line:
 ```
+~$ sudo nano /etc/wsl.conf 
+
 [boot]
 systemd=true
 ```
@@ -69,8 +70,8 @@ Download installer and verify hash:
 ```
 Important: Alter the root user first:
 ```
-~$ sudo mysql    // Open MySQL prompt
-mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';    // Important step!
+~$ sudo mysql
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 mysql> exit
 ```
 Then run secure installation:
@@ -211,8 +212,44 @@ Create a configuration file for the debugger in VSCode and replace its content w
 ```
 
 ### GIT
-Maybe you are asked to provide a name and an email address of your Git account:
+Git is pre-installed on Ubuntu-22.04. But you probably will be asked to provide a name and an email address of your Git account:
 ```
 ~$ git config --global user.name "your_name"
 ~$ git config --global user.email "your_email"
+```
+
+<hr>
+
+## Backup
+### Create a Backup
+To backup the whole stack you have to export the WSL distribution to a safe place in your file system.
+
+Quit all WSL instances:
+```
+PS wsl --shutdown
+```
+
+To get a full list of installed distros run the following command in Powershell:
+```
+PS wsl -l -v
+```
+
+Find yours and use the exact name. E. g.:
+```
+PS wsl --export Ubuntu-22.04 F:\backups\ubuntu2204.tar
+```
+
+### Restore a Backup
+To restore the backup you have to run a command, that matches the following pattern:
+
+wsl --import \<ImageName\> \<TargetDirectory\> \<SourceDirectory\>
+
+In your case:
+```
+PS --import Ubuntu-22.04 C:\YourFolder\Ubuntu-22.04 F:\backups\ubuntu2204.tar
+```
+
+Verify the import was successfull:
+```
+PS wsl --list
 ```
