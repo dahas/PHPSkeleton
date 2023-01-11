@@ -28,10 +28,12 @@ PS wsl --install
 
 Open Microsoft Store and search for "Ubuntu". Choose 22.04 (or higher). Download it, then click open. Follow the instructions in the terminal.
 
-To enable SystemD create `wsl.conf` and enter this line:
+To enable SystemD create `wsl.conf`:
 ```
 ~$ sudo nano /etc/wsl.conf 
-
+```
+Enter:
+```
 [boot]
 systemd=true
 ```
