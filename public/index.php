@@ -3,7 +3,7 @@
 require dirname(__DIR__, 1) . '/application/vendor/autoload.php'; // <-- Import of autoloader
 
 // Import of classes
-use PHPSkeleton\App\Bar; 
+use PHPSkeleton\App\Bar;
 use PHPSkeleton\App\Foo;
 use PHPSkeleton\Sources\Router;
 use PHPSkeleton\App\ContactForm;
@@ -40,8 +40,8 @@ $router->get("/foo", function () {
  */
 $router->get("/bar/compare", function (array $params) {
     $bar = Bar::getInstance(); // <-- Creating a singleton
-    if(!empty($params)) {
-        if($bar->compare($params["a"], $params["b"])) {
+    if (!empty($params)) {
+        if ($bar->compare($params["a"], $params["b"])) {
             echo "<span style='color:green;'>A und B sind identisch!</span>";
         } else {
             echo "<span style='color:red;'>A und B sind NICHT identisch!</span>";
@@ -52,7 +52,7 @@ $router->get("/bar/compare", function (array $params) {
 /**
  * http://localhost:2400/contact
  */
-$router->get("/contact", [ContactForm::class, "renderForm"]);  // <-- Provide a callable in a separate class as an Array: Classname first, then the Method.
+$router->get("/contact", [ContactForm::class, "renderForm"]); // <-- Provide a callable in a separate class as an Array: Classname first, then the Method.
 $router->post("/contact", function ($params) {
     print_r($params);
 });
@@ -62,6 +62,16 @@ $router->post("/contact", function ($params) {
  */
 $router->notFound(function () {
     echo "Page Not Found!";
+});
+
+$router->get("/filter", function ($params) {
+    foreach ($params as $key => $val) {
+        if (intval($params[$key]))
+            echo "NUMBER: $key => $val \n";
+        else {
+            echo "STRING: $key => " . htmlspecialchars(string: $val, encoding: "UTF-8") . " \n";
+        }
+    }
 });
 
 $router->run();
