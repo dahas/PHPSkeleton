@@ -1,12 +1,18 @@
 <?php
 
-require dirname(__DIR__, 1) . '/application/vendor/autoload.php'; // <-- Import of autoloader
+require 'application/vendor/autoload.php'; // <-- Import of autoloader
 
 // Import of classes
 use PHPSkeleton\App\Bar;
 use PHPSkeleton\App\Foo;
 use PHPSkeleton\Sources\Router;
 use PHPSkeleton\App\ContactForm;
+
+
+## ----------------------------------------- ##
+$_SERVER['REQUEST_URI'] = "/contact";
+$_SERVER['REQUEST_METHOD'] = "GET";
+## ----------------------------------------- ##
 
 
 $router = new Router();

@@ -19,7 +19,7 @@
             "name": "PHP App",
             "type": "php",
             "request": "launch",
-            "program": "${workspaceFolder}/public/index.php",
+            "program": "${workspaceFolder}/debug.php",
             "args": [],
             "externalConsole": false,
             "port": 9003
