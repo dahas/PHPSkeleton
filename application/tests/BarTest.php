@@ -17,7 +17,7 @@ class BarTest extends TestCase
         $this->bar = NULL;
     }
 
-    public function compareData() {
+    public static function compareData() {
         return array(
             array("Vergleich", "vergleich", false),
             array("vergleich", "vergleIch", false),

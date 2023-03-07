@@ -1,6 +1,6 @@
 {
     "name": "dahas/phpskeleton",
-    "description": "A PHP app skeleton",
+    "description": "A PHP Application Skeleton",
     "type": "project",
     "license": "MIT",
     "authors": [
@@ -9,11 +9,17 @@
             "email": "dahas@gmx.de"
         }
     ],
+    "scripts": {
+        "test": "./vendor/bin/phpunit"
+    },
     "autoload": {
         "psr-4": {
             "PHPSkeleton\\Sources\\": "src/",
             "PHPSkeleton\\Services\\": "services/",
             "PHPSkeleton\\App\\": "lib/"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
     }
 }

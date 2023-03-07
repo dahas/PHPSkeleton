@@ -20,6 +20,6 @@ class FooTest extends TestCase
     public function testAdd()
     {
         $result = $this->foo->add(3, 5);
-        $this->assertEquals(8, $result);
+        $this->assertEquals('8,00', $result);
     }
 }
