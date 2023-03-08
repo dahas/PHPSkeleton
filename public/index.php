@@ -1,6 +1,6 @@
 <?php
 
-require dirname(__DIR__, 1) . '/application/vendor/autoload.php'; // <-- Import of autoloader
+require dirname(__DIR__, 1) . '/vendor/autoload.php'; // <-- Import of autoloader
 
 // Import of classes
 use PHPSkeleton\App\Bar;

@@ -1,6 +1,6 @@
 <?php
 
-require 'application/vendor/autoload.php'; // <-- Import of autoloader
+require 'vendor/autoload.php'; // <-- Import of autoloader
 
 // Import of classes
 use PHPSkeleton\App\Bar;
@@ -9,10 +9,10 @@ use PHPSkeleton\Sources\Router;
 use PHPSkeleton\App\ContactForm;
 
 
-## ----------------------------------------- ##
-$_SERVER['REQUEST_URI'] = "/contact";
+# -----------------------------------------
+$_SERVER['REQUEST_URI'] = "/";
 $_SERVER['REQUEST_METHOD'] = "GET";
-## ----------------------------------------- ##
+# -----------------------------------------
 
 
 $router = new Router();
