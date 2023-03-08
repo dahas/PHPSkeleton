@@ -22,7 +22,7 @@ class BarTest extends TestCase
             array("Vergleich", "vergleich", false),
             array("vergleich", "vergleIch", false),
             array("123", 123, false),
-            array("123", "123", true)
+            array("123", "1234", true)
         );
     }
  
