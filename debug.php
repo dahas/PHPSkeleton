@@ -9,6 +9,7 @@ use PHPSkeleton\Sources\Router;
 use PHPSkeleton\App\ContactForm;
 
 
+# Set Request Params:
 # -----------------------------------------
 $_SERVER['REQUEST_URI'] = "/";
 $_SERVER['REQUEST_METHOD'] = "GET";
