@@ -8,6 +8,11 @@ use PHPSkeleton\App\Foo;
 use PHPSkeleton\Sources\Router;
 use PHPSkeleton\App\ContactForm;
 
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__, 1));
+$dotenv->safeLoad();
+
+print_r($_ENV);
+
 
 $router = new Router();
 
