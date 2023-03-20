@@ -4,3 +4,4 @@
 /vendor/
 test.php
 .env
+.routes.cache
