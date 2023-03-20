@@ -11,8 +11,6 @@ use PHPSkeleton\App\ContactForm;
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->safeLoad();
 
-print_r($_ENV);
-
 
 # Set Request Params:
 # -----------------------------------------
