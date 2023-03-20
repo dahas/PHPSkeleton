@@ -14,8 +14,12 @@ $dotenv->safeLoad();
 
 # Set Request Params:
 # -----------------------------------------
-$_SERVER['REQUEST_URI'] = "/";
+$_SERVER['REQUEST_URI'] = "/Text/reverse";
+$_SERVER['REQUEST_URI'] = "/Foo/multiply";
 $_SERVER['REQUEST_METHOD'] = "GET";
+$_GET['a'] = 12;
+$_GET['b'] = 21;
+$_POST['flip'] = "Reverse";
 # -----------------------------------------
 
 
