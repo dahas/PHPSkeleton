@@ -16,7 +16,7 @@
         "psr-4": {
             "PHPSkeleton\\Sources\\": "src/",
             "PHPSkeleton\\Services\\": "services/",
-            "PHPSkeleton\\App\\": "lib/"
+            "PHPSkeleton\\App\\": "controller/"
         }
     },
     "require-dev": {
