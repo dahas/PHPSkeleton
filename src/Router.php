@@ -80,7 +80,13 @@ class Router {
 
     public function run(): void
     {
-        $path = parse_url($_SERVER['REQUEST_URI'])['path'];
+        $uri = parse_url($_SERVER['REQUEST_URI']);
+        $path = $uri['path'];
+        $query = $uri['query'] ?? "";
+        $qArr = [];
+        if ($query) {
+            parse_str($query, $qArr);
+        }
         $method = strtolower($_SERVER['REQUEST_METHOD']);
 
         if (isset($this->handlers[$method . $path])) {
@@ -94,7 +100,7 @@ class Router {
                 $callback = $handler["callback"];
             }
 
-            $this->request->setData(array_merge($_GET, $_POST));
+            $this->request->setData(array_merge($qArr, $_GET, $_POST));
             $this->response->setStatus(200);
 
             if ($callback) {
