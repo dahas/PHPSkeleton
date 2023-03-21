@@ -2,9 +2,11 @@
 
 use PHPSkeleton\App\AppController;
 
-require dirname(__DIR__, 1) . '/vendor/autoload.php';
+!defined('ROOT') && define('ROOT', dirname(__DIR__, 1));
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+require ROOT . '/vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(ROOT);
 $dotenv->safeLoad();
 
 $app = new AppController();
