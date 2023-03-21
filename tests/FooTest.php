@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use PHPSkeleton\App\Foo;
+use PHPSkeleton\App\ArithmeticController;
 use PHPUnit\Framework\TestCase;
 
 class FooTest extends TestCase
@@ -9,7 +9,7 @@ class FooTest extends TestCase
  
     protected function setUp() : void
     {
-        $this->foo = new Foo();
+        $this->foo = new ArithmeticController();
     }
  
     protected function tearDown() : void

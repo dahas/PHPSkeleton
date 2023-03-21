@@ -2,7 +2,6 @@
 
 namespace PHPSkeleton\App;
 
-use PHPSkeleton\Sources\attributes\Route;
 use PHPSkeleton\Sources\interfaces\Bars;
 
 class Bar implements Bars {  // <-- Implementing an interface

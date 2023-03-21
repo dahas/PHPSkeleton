@@ -4,7 +4,7 @@ namespace PHPSkeleton\Sources;
 
 use ReflectionClass;
 
-class ParentClass
+class ControllerBase
 {
     public function __construct()
     {

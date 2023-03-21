@@ -2,9 +2,9 @@
 
 namespace PHPSkeleton\Sources\traits;
 
-trait Tools 
+trait Utils 
 {
-    public function formatNumber(int|float $input) : string {
+    public function germanDecimalNumberFormat(int|float $input) : string {
         return number_format($input, 2, ',', '.');
     }
 }

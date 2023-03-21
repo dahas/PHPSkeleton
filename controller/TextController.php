@@ -3,12 +3,15 @@
 namespace PHPSkeleton\App;
 
 use PHPSkeleton\Sources\attributes\Route;
+use PHPSkeleton\Sources\Request;
+use PHPSkeleton\Sources\Response;
 
 class TextController {
-    
-    #[Route('/Text/reverse')]
-    public function reverse($data): void
+
+    #[Route(path: '/Text/reverse', method: 'get')]
+    public function reverse(Request $request, Response $response): void
     {
-        echo "Flip {$data['flip']} => " . strrev($data['flip']);
+        $data = $request->getData();
+        $response->write("Flip {$data['flip']} => " . strrev($data['flip']));
     }
 }

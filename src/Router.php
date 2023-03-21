@@ -6,15 +6,21 @@ use PHPSkeleton\Sources\attributes\Route;
 
 class Router {
 
+    private Request $request;
+    private Response $response;
     private array $handlers;
     private $notFoundHandler;
 
     private const GET = "get";
     private const POST = "post";
 
-    public function __construct()
+    public function __construct(Request $request, Response $response)
     {
+        $this->request = $request;
+        $this->response = $response;
+
         $routesCacheFile = dirname(__DIR__, 1) . "/.routes.cache";
+
         if (file_exists($routesCacheFile) && $_ENV["MODE"] !== "dev") {
             $routesCache = file($routesCacheFile)[0];
             $this->handlers = unserialize($routesCache);
@@ -88,14 +94,15 @@ class Router {
                 $callback = $handler["callback"];
             }
 
+            $this->request->setData(array_merge($_GET, $_POST));
+            $this->response->setStatus(200);
+
             if ($callback) {
-                call_user_func_array($callback, [
-                    array_merge($_GET, $_POST)
-                ]);
+                call_user_func_array($callback, [$this->request, $this->response]);
             }
         } else {
             if ($this->notFoundHandler) {
-                call_user_func($this->notFoundHandler);
+                call_user_func_array($this->notFoundHandler, [$this->request, $this->response]);
             } else {
                 header("HTTP/1.0 404 Page not found!");
             }
