@@ -101,16 +101,21 @@ class Router {
             }
 
             $this->request->setData(array_merge($qArr, $_GET, $_POST));
-            $this->response->setStatus(200);
 
             if ($callback) {
-                call_user_func_array($callback, [$this->request, $this->response]);
+                $res = call_user_func_array($callback, [$this->request, $this->response]);
+                if (!$res) {
+                    $this->response->setStatus(500);
+                }
             }
         } else {
             if ($this->notFoundHandler) {
-                call_user_func_array($this->notFoundHandler, [$this->request, $this->response]);
+                $res = call_user_func_array($this->notFoundHandler, [$this->request, $this->response]);
+                if (!$res) {
+                    $this->response->setStatus(500);
+                }
             } else {
-                header("HTTP/1.0 404 Page not found!");
+                $this->response->setStatus(404);
             }
         }
     }
