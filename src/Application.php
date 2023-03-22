@@ -11,7 +11,7 @@ class Application {
     public function __construct()
     {
         $this->request = new Request();
-        $this->response = new Response(new Latte());
+        $this->response = new Response();
         $this->router = new Router($this->request, $this->response);
     }
 
@@ -24,7 +24,6 @@ class Application {
 
         $this->router->run();
 
-        $this->response->render('App.html', ["title" => "Hey there!"]);
         $this->response->flush();
     }
 }

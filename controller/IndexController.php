@@ -4,6 +4,7 @@ namespace PHPSkeleton\App;
 
 use PHPSkeleton\Sources\attributes\Route;
 use PHPSkeleton\Sources\ControllerBase;
+use PHPSkeleton\Sources\Latte;
 use PHPSkeleton\Sources\Request;
 use PHPSkeleton\Sources\Response;
 
@@ -14,6 +15,8 @@ class IndexController extends ControllerBase {
     {
         $data = $request->getData();
 
+        $template = new Latte();
+
         $_nav = [
             "items" => [
                 "one" => "First menu item",
@@ -21,11 +24,16 @@ class IndexController extends ControllerBase {
                 "dri" => "Third menu item"
             ]
         ];
-        $response->assign("nav", "Nav.html", $_nav);
+        $nav = $template->parse("Nav.partial.html", $_nav);
 
         $_content = [
-            "var" => "Hello Latte!"
+            "title" => "Hey there!",
+            "var" => "Hello Latte!",
+            "nav" => $nav,
+            "content" => '<b>The Index content ...</b>'
         ];
-        $response->assign("content", 'Index.html', $_content);
+        $content = $template->parse('Index.partial.html', $_content);
+
+        $response->write($content);
     }
 }
