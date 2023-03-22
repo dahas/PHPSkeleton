@@ -19,18 +19,17 @@ class IndexController extends ControllerBase {
 
         $_nav = [
             "items" => [
-                "one" => "First menu item",
-                "two" => "Second menu item",
-                "dri" => "Third menu item"
+                "one" => "Home",
+                "two" => "Second",
+                "dri" => "Third item"
             ]
         ];
         $nav = $template->parse("Nav.partial.html", $_nav);
 
         $_content = [
-            "title" => "Hey there!",
+            "title" => "PHP App Skeleton",
             "var" => "Hello Latte!",
-            "nav" => $nav,
-            "content" => '<b>The Index content ...</b>'
+            "nav" => $nav
         ];
         $content = $template->parse('Index.partial.html', $_content);
 
