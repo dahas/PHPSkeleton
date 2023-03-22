@@ -5,7 +5,7 @@ namespace PHPSkeleton\Sources;
 final class Request {
 
     private string $method;
-    private array $data;
+    private array $data = [];
 
     public function getMethod(): string
     {
