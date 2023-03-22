@@ -7,6 +7,24 @@ class Response {
     private string $status = "200 OK";
     private array $headers = [];
     private string $body = "";
+    private object $engine;
+    private array $templateVars = [];
+
+    public function __construct(object $templateEngine = null)
+    {
+        $this->engine = $templateEngine;
+    }
+
+    public function assign(string $_var, string $file, array $params = []): void
+    {
+        $this->templateVars[$_var] = $this->engine->parse($file, $params);
+    }
+
+    public function render(string $file, array $params = []): void
+    {
+        $this->templateVars = array_merge($this->templateVars, $params);
+        $this->body = $this->engine->parse($file, $this->templateVars);
+    }
 
     public function setStatus(int $code): void
     {
