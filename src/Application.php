@@ -1,12 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace PHPSkeleton\App;
+namespace PHPSkeleton\Sources;
 
-use PHPSkeleton\Sources\Request;
-use PHPSkeleton\Sources\Response;
-use PHPSkeleton\Sources\Router;
-
-class AppController {
+class Application {
 
     private Request $request;
     private Response $response;
@@ -22,8 +18,8 @@ class AppController {
     public function execute(): void
     {
         $this->router->notFound(function (Request $request, Response $response) {
-            $this->response->setStatus(404);
-            $this->response->write("Page Not Found!");
+            $response->setStatus(404);
+            $response->write("Page Not Found!");
         });
 
         $this->router->run();

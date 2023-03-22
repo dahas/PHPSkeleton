@@ -1,6 +1,6 @@
 <?php
 
-use PHPSkeleton\App\AppController;
+use PHPSkeleton\Sources\Application;
 
 !defined('ROOT') && define('ROOT', dirname(__DIR__, 1));
 
@@ -9,5 +9,5 @@ require ROOT . '/vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(ROOT);
 $dotenv->safeLoad();
 
-$app = new AppController();
+$app = new Application();
 $app->execute();

@@ -104,14 +104,14 @@ class Router {
 
             if ($callback) {
                 $res = call_user_func_array($callback, [$this->request, $this->response]);
-                if (!$res) {
+                if ($res === false) {
                     $this->response->setStatus(500);
                 }
             }
         } else {
             if ($this->notFoundHandler) {
                 $res = call_user_func_array($this->notFoundHandler, [$this->request, $this->response]);
-                if (!$res) {
+                if ($res === false) {
                     $this->response->setStatus(500);
                 }
             } else {

@@ -5,3 +5,5 @@
 test.php
 .env
 .routes.cache
+
+.latte/cache/*
