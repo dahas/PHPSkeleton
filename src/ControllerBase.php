@@ -2,16 +2,17 @@
 
 namespace PHPSkeleton\Sources;
 
+use PHPSkeleton\Sources\interfaces\ControllerInterface;
 use ReflectionClass;
 
-class ControllerBase
+class ControllerBase implements ControllerInterface
 {
     public function __construct()
     {
         $this->injectServices('PHPSkeleton\\Services\\');
     }
 
-    public function injectServices($namespace)
+    public function injectServices(string $namespace): void
     {
         $rc = new ReflectionClass(get_class($this));  // <-- Reflection class returns details of a class
         $properties = $rc->getProperties();
