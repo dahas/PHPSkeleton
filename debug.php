@@ -1,6 +1,6 @@
 <?php
 
-use PHPSkeleton\Sources\Application;
+use PHPSkeleton\App\AppController;
 
 !defined('ROOT') && define('ROOT', __DIR__);
 
@@ -25,5 +25,5 @@ $_POST['flop'] = "Reverse";
 # -----------------------------------------
 
 
-$app = new Application();
+$app = new AppController();
 $app->execute();

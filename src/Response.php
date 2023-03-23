@@ -7,6 +7,7 @@ class Response {
     private string $status = "200 OK";
     private array $headers = [];
     private string $body = "";
+    private array $templateVars = [];
 
     public function setStatus(int $code): void
     {
@@ -21,6 +22,16 @@ class Response {
     public function write(string $content): void
     {
         $this->body .= $content;
+    }
+
+    public function assign(string $_var, string $html): void
+    {
+        $this->templateVars[$_var] = $html;
+    }
+
+    public function getVars(): array
+    {
+        return $this->templateVars;
     }
 
     public function flush(): void

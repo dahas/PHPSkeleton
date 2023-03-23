@@ -27,7 +27,7 @@ class Router {
         } else {
             $handle = fopen($routesCacheFile, "w");
 
-            $files = array_diff(scandir(dirname(__DIR__, 1) . "/controller"), array('.', '..'));
+            $files = array_diff(scandir(dirname(__DIR__, 1) . "/app"), array('.', '..'));
 
             foreach ($files as $file) {
                 $controller = "PHPSkeleton\\App\\" . explode(".", $file)[0];

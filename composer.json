@@ -14,9 +14,10 @@
     },
     "autoload": {
         "psr-4": {
+            "PHPSkeleton\\Library\\": "lib/",
             "PHPSkeleton\\Sources\\": "src/",
             "PHPSkeleton\\Services\\": "services/",
-            "PHPSkeleton\\App\\": "controller/"
+            "PHPSkeleton\\App\\": "app/"
         }
     },
     "require-dev": {
