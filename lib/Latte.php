@@ -7,6 +7,8 @@ use PHPSkeleton\Sources\Response;
 
 class Latte {
 
+    public const LAYOUT = "layout";
+
     private Engine $latte;
     private string $layout;
     private Response $response;
@@ -29,35 +31,41 @@ class Latte {
      * @param string $file | The name of a template file (optional)
      * @param array $_vars | An associative array with template vars: ['var' => $content] (optional)
      */
-    public function assign(): void
+    public function assignTo(string $file, array $_vars = []): void
     {
-        $file = ""; $_vars = [];
-        $this->getArgs(func_get_args(), $file, $_vars);
+        if ($file === 'layout') {
+            $file = $this->layout;
+        }
         foreach ($_vars as $key => $val) {
             $this->response->assign($file, $key, $val);
         }
     }
 
     /**
-     * Use this method to render a template. If no file name is given the main layout file is used.
+     * Use this method to parse a template. If no file name is given the main layout file is used.
      * 
      * @param string $file | The name of a template file (optional)
      * @param array $_vars | An associative array with template vars: ['var' => $content] (optional)
      */
-    public function render(): string
+    public function parse(string $file, array $_vars = []): string
     {
-        $file = ""; $_vars = [];
-        $this->getArgs(func_get_args(), $file, $_vars);
         $vars = $this->response->getVars();
         $tmplVars = array_merge($vars[$file] ?? [], $_vars);
         return $this->latte->renderToString($this->templateDir . '/' . $file, $tmplVars);
     }
-    
-    private function getArgs($args, &$file, &$_vars) {
+
+    public function render(array $_vars = []): void
+    {
+        $html = $this->parse($this->layout, $_vars);
+        $this->response->write($html);
+    }
+
+    private function getArgs($args, &$file, &$_vars)
+    {
         if (empty($args)) {
             $file = $this->layout;
             $_vars = [];
-        } else if(is_string($args[0])) {
+        } else if (is_string($args[0])) {
             $file = $args[0];
             $_vars = $args[1] ?? [];
         } else {

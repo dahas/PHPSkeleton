@@ -25,8 +25,8 @@ class ArithmeticController
             'header' => 'Arithmetic',
             "var" => "Hello Arithmetic Controller!"
         ];
-        $content = $template->render('Arithmetic.partial.html', $_vars);
-        $template->assign([
+        $content = $template->parse('Arithmetic.partial.html', $_vars);
+        $template->assignTo(Latte::LAYOUT, [
             'title' => 'Arithmetic',
             'content' => $content
         ]);

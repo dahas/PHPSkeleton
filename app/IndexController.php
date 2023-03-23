@@ -21,8 +21,8 @@ class IndexController extends ControllerBase {
             'header' => 'Index',
             "var" => "Hello Index Controller!"
         ];
-        $content = $template->render('Index.partial.html', $_vars);
-        $template->assign([
+        $content = $template->parse('Index.partial.html', $_vars);
+        $template->assignTo(Latte::LAYOUT, [
             'title' => 'Index',
             'content' => $content
         ]);

@@ -20,16 +20,15 @@ class AppController extends AppBase {
 
         $this->router->notFound(function (Request $request, Response $response) use ($template) {
             $response->setStatus(404);
-            $content = $template->render('404.partial.html');
-            $template->assign([
+            $template->assignTo(Latte::LAYOUT, [
                 'title' => '404 Not Found',
-                'content' => $content
+                'content' => $template->parse('404.partial.html')
             ]);
         });
 
         $this->router->run();
 
-        $nav = $template->render('Nav.partial.html', [
+        $nav = $template->parse('Nav.partial.html', [
             "items" => [
                 "/" => "Home",
                 "/Arithmetic" => "Arithmetic",
@@ -37,13 +36,11 @@ class AppController extends AppBase {
             ]
         ]);
 
-        $template->assign([
+        $template->assignTo(Latte::LAYOUT, [
             "nav" => $nav
         ]);
 
-        $html = $template->render();
-
-        $this->response->write($html);
+        $template->render();
 
         $this->response->flush();
     }
