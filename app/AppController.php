@@ -16,27 +16,34 @@ class AppController extends AppBase {
 
     public function execute(): void
     {
-        $this->router->notFound(function (Request $request, Response $response) {
+        $template = new Latte($this->response);
+
+        $this->router->notFound(function (Request $request, Response $response) use ($template) {
             $response->setStatus(404);
-            $response->write("Page Not Found!");
+            $content = $template->render('404.partial.html');
+            $template->assign([
+                'title' => '404 Not Found',
+                'content' => $content
+            ]);
         });
 
         $this->router->run();
 
-        $template = new Latte($this->response);
-
-        $template->parse('Nav.partial.html', 'nav', [
+        $nav = $template->render('Nav.partial.html', [
             "items" => [
-                "one" => "Home",
-                "two" => "Second",
-                "dri" => "Third item"
+                "/" => "Home",
+                "/Arithmetic" => "Arithmetic",
+                "/None" => "Third item"
             ]
         ]);
 
-        $_vars = [
-            "title" => "PHP App Skeleton"
-        ];
-        $template->render('App.html', $_vars);
+        $template->assign([
+            "nav" => $nav
+        ]);
+
+        $html = $template->render();
+
+        $this->response->write($html);
 
         $this->response->flush();
     }

@@ -24,9 +24,9 @@ class Response {
         $this->body .= $content;
     }
 
-    public function assign(string $_var, string $html): void
+    public function assign(string $file, string $var, string $html): void
     {
-        $this->templateVars[$_var] = $html;
+        $this->templateVars[$file][$var] = $html;
     }
 
     public function getVars(): array

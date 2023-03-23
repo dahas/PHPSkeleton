@@ -18,8 +18,13 @@ class IndexController extends ControllerBase {
         $template = new Latte($response);
 
         $_vars = [
+            'header' => 'Index',
             "var" => "Hello Index Controller!"
         ];
-        $template->parse('Index.partial.html', 'content', $_vars);
+        $content = $template->render('Index.partial.html', $_vars);
+        $template->assign([
+            'title' => 'Index',
+            'content' => $content
+        ]);
     }
 }

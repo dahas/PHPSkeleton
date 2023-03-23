@@ -2,6 +2,7 @@
 
 namespace PHPSkeleton\App;
 
+use PHPSkeleton\Library\Latte;
 use PHPSkeleton\Sources\attributes\Route;
 use PHPSkeleton\Sources\Request;
 use PHPSkeleton\Sources\Response;
@@ -11,6 +12,25 @@ use PHPSkeleton\Sources\traits\Utils;
 class ArithmeticController
 {
     use Utils;  // <-- Use methods of a trait
+
+
+    #[Route(path: '/Arithmetic', method: 'get')]
+    public function main(Request $request, Response $response): void
+    {
+        $data = $request->getData();
+
+        $template = new Latte($response);
+
+        $_vars = [
+            'header' => 'Arithmetic',
+            "var" => "Hello Arithmetic Controller!"
+        ];
+        $content = $template->render('Arithmetic.partial.html', $_vars);
+        $template->assign([
+            'title' => 'Arithmetic',
+            'content' => $content
+        ]);
+    }
 
 
     #[Route(path: '/Arithmetic/add', method: 'get')]
