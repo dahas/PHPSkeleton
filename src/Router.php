@@ -19,7 +19,7 @@ class Router {
         $this->request = $request;
         $this->response = $response;
 
-        $routesCacheFile = dirname(__DIR__, 1) . "/.routes.cache";
+        $routesCacheFile = ROOT . "/.routes.cache";
 
         if (file_exists($routesCacheFile) && $_ENV["MODE"] !== "dev") {
             $routesCache = file($routesCacheFile)[0];
@@ -27,7 +27,7 @@ class Router {
         } else {
             $handle = fopen($routesCacheFile, "w");
 
-            $files = array_diff(scandir(dirname(__DIR__, 1) . "/app"), array('.', '..'));
+            $files = array_diff(scandir(ROOT . "/app"), array('.', '..'));
 
             foreach ($files as $file) {
                 $controller = "PHPSkeleton\\App\\" . explode(".", $file)[0];
