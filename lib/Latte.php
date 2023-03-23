@@ -12,12 +12,14 @@ class Latte {
     private Engine $latte;
     private string $layout;
     private Response $response;
-    private string $templateDir = ROOT . '/templates';
+    private string $templateDir;
     private string $cacheDir = ROOT . '/.latte/cache';
 
-    public function __construct(Response $response)
+    public function __construct(Response $response, $templateDir = ROOT . '/templates')
     {
-        $this->layout = $_ENV['APP_TEMPLATE_NAME'];
+        $this->templateDir = $templateDir;
+
+        $this->layout = $_ENV['LAYOUT_TEMPLATE_NAME'];
         $this->response = $response;
 
         $this->latte = new Engine();

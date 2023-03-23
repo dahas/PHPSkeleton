@@ -6,9 +6,10 @@ use PHPSkeleton\Sources\Response;
 use PHPSkeleton\Sources\Request;
 
 class ArithmeticTest extends TestCase {
-    private $arithmetic;
-    private $request;
-    private $response;
+    
+    private ArithmeticController $arithmetic;
+    private Request $request;
+    private Response $response;
 
     protected function setUp(): void
     {
@@ -19,9 +20,9 @@ class ArithmeticTest extends TestCase {
 
     protected function tearDown(): void
     {
-        $this->arithmetic = NULL;
-        $this->request = NULL;
-        $this->response = NULL;
+        unset($this->arithmetic);
+        unset($this->request);
+        unset($this->response);
     }
 
     public function testAdd()
