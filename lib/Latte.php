@@ -13,11 +13,12 @@ class Latte {
     private string $layout;
     private Response $response;
     private string $templateDir;
-    private string $cacheDir = ROOT . '/.latte/cache';
+    private string $cacheDir;
 
-    public function __construct(Response $response, $templateDir = ROOT . '/templates')
+    public function __construct(Response $response, $templateDir = ROOT . '/templates', $cacheDir = ROOT . '/.latte/cache')
     {
         $this->templateDir = $templateDir;
+        $this->cacheDir = $cacheDir;
 
         $this->layout = $_ENV['LAYOUT_TEMPLATE_NAME'];
         $this->response = $response;

@@ -19,7 +19,7 @@ class LatteTest extends TestCase
         $_ENV['LAYOUT_TEMPLATE_NAME'] = "Layout.html";
 
         $this->response = new Response();
-        $this->template = new Latte($this->response, __DIR__ . '/files');
+        $this->template = new Latte($this->response, __DIR__ . '/files', __DIR__ . '/cache');
     }
  
     protected function tearDown() : void

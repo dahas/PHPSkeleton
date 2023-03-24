@@ -7,3 +7,5 @@ test.php
 .routes.cache
 
 .latte/cache/*
+
+/tests/cache
