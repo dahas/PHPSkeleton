@@ -14,8 +14,8 @@ class Latte {
 
     public function __construct(
         private Response $response,
-        private $templateDir = ROOT . '/templates',
-        private $cacheDir = ROOT . '/.latte/cache'
+        private string $templateDir = ROOT . '/templates',
+        private string $cacheDir = ROOT . '/.latte/cache'
     ) {
         $this->layout = $_ENV['LAYOUT_TEMPLATE_NAME'];
 
