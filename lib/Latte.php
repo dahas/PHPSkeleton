@@ -11,17 +11,13 @@ class Latte {
 
     private Engine $latte;
     private string $layout;
-    private Response $response;
-    private string $templateDir;
-    private string $cacheDir;
 
-    public function __construct(Response $response, $templateDir = ROOT . '/templates', $cacheDir = ROOT . '/.latte/cache')
-    {
-        $this->templateDir = $templateDir;
-        $this->cacheDir = $cacheDir;
-
+    public function __construct(
+        private Response $response,
+        private $templateDir = ROOT . '/templates',
+        private $cacheDir = ROOT . '/.latte/cache'
+    ) {
         $this->layout = $_ENV['LAYOUT_TEMPLATE_NAME'];
-        $this->response = $response;
 
         $this->latte = new Engine();
         $this->latte->setTempDirectory($this->cacheDir);
@@ -36,7 +32,7 @@ class Latte {
      */
     public function assignTo(string $file, array $_vars = []): void
     {
-        if ($file === 'layout') {
+        if ($file === self::LAYOUT) {
             $file = $this->layout;
         }
         foreach ($_vars as $key => $val) {
