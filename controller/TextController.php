@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace PHPSkeleton\App;
+namespace PHPSkeleton\Controller;
 
 use PHPSkeleton\Sources\attributes\Route;
 use PHPSkeleton\Sources\Request;
@@ -12,6 +12,6 @@ class TextController {
     public function reverse(Request $request, Response $response): void
     {
         $data = $request->getData();
-        $response->write("Flip {$data['flip']} => " . strrev($data['flip']));
+        $response->toJSON("Text", ["rev" => "Flip {$data['flip']} => " . strrev($data['flip'])]);
     }
-}
+} 

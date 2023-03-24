@@ -7,7 +7,7 @@ use PHPSkeleton\Sources\AppBase;
 use PHPSkeleton\Sources\Request;
 use PHPSkeleton\Sources\Response;
 
-class AppController extends AppBase {
+class App extends AppBase {
 
     public function __construct()
     {
@@ -32,7 +32,7 @@ class AppController extends AppBase {
             "items" => [
                 "/" => "Home",
                 "/Arithmetic" => "Arithmetic",
-                "/None" => "Third item"
+                "/Text/reverse?flip=elloH" => "Flip Text"
             ]
         ]);
 

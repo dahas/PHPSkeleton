@@ -8,6 +8,7 @@ class Response {
     private array $headers = [];
     private string $body = "";
     private array $templateVars = [];
+    private array $jsonData = [];
 
     public function setStatus(int $code): void
     {
@@ -24,14 +25,19 @@ class Response {
         $this->body .= $content;
     }
 
-    public function assign(string $file, string $var, string $html): void
+    public function assignHTML(string $tmpl, string $var, string $html): void
     {
-        $this->templateVars[$file][$var] = $html;
+        $this->templateVars[$tmpl][$var] = $html;
     }
 
     public function getVars(): array
     {
         return $this->templateVars;
+    }
+
+    public function toJSON(string $var, array $data): void
+    {
+        $this->jsonData[$var] = $data;
     }
 
     public function flush(): void
@@ -42,15 +48,17 @@ class Response {
             header("{$name}: {$value}");
         }
 
-        print $this->body;
+        if ($this->jsonData) { # JSON
+            header('Content-Type: application/json');
+            print json_encode($this->jsonData);
+        } else { # HTML
+            header('Content-Type: text/html');
+            print $this->body;
+        }
 
         $this->headers = [];
         $this->body = "";
-    }
-
-    public function getBody(): string
-    {
-        return $this->body;
+        $this->jsonData = [];
     }
 
     private function mapStatusCode(int $code): string

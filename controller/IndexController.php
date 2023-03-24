@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace PHPSkeleton\App;
+namespace PHPSkeleton\Controller;
 
 use PHPSkeleton\Library\Latte;
 use PHPSkeleton\Sources\attributes\Route;
