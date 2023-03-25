@@ -11,8 +11,8 @@ use PHPSkeleton\Sources\traits\Utils;
 
 
 class ArithmeticController {
+    
     use Utils; // <-- Use methods of a trait
-
 
     #[Route(path: '/Arithmetic', method: 'get')]
     public function main(Request $request, Response $response): void
