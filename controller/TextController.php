@@ -14,12 +14,16 @@ class TextController extends ControllerBase {
     #[Route(path: '/Text/bold', method: 'get')]
     public function bold(Request $request, Response $response): void
     {
-        $data = $request->getData();
-
         $template = new Latte();
 
         $_vars = [
-            'navigation' => 'NAVIGATION',
+            "nav" => [
+                "/" => "Home",
+                "/Arithmetic" => "Arithmetic",
+                "/Text/reverse?flip=elloH" => "Flip Text",
+                "/Data/load" => "Data",
+                "/qwert" => "No Controller"
+            ],
             'title' => 'Text Controller',
             'header' => 'Text',
             "var" => "Hello Text Controller!"

@@ -3,9 +3,6 @@
 namespace PHPSkeleton\Library;
 
 use Latte\Engine;
-use PHPSkeleton\Sources\HtmlAdapter;
-use PHPSkeleton\Sources\Request;
-use PHPSkeleton\Sources\Response;
 
 class Latte {
 

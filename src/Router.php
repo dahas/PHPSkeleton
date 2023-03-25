@@ -73,7 +73,7 @@ class Router {
         ];
     }
 
-    public function notFound(callable $callback): void
+    public function notFound(callable|array $callback): void
     {
         $this->notFoundHandler = $callback;
     }

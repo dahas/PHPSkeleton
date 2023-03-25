@@ -13,21 +13,16 @@ class IndexController extends ControllerBase {
     #[Route(path: '/', method: 'get')]
     public function main(Request $request, Response $response): void
     {
-        $data = $request->getData();
-
         $template = new Latte();
 
-        $nav = $template->parse('Nav.partial.html', [
-            "items" => [
+        $_vars = [
+            "nav" => [
                 "/" => "Home",
                 "/Arithmetic" => "Arithmetic",
                 "/Text/reverse?flip=elloH" => "Flip Text",
+                "/Data/load" => "Data",
                 "/qwert" => "No Controller"
-            ]
-        ]);
-
-        $_vars = [
-            'navigation' => $nav,
+            ],
             'title' => 'Index Controller',
             'header' => 'Index',
             "var" => "Hello Index Controller!"
