@@ -36,7 +36,7 @@ class Latte {
             $file = $this->layout;
         }
         foreach ($_vars as $key => $val) {
-            $this->response->assign($file, $key, $val);
+            $this->response->html->assignContent($file, $key, $val);
         }
     }
 
@@ -49,7 +49,7 @@ class Latte {
      */
     public function parse(string $file, array $_vars = []): string
     {
-        $vars = $this->response->getVars();
+        $vars = $this->response->html->getContent();
         $tmplVars = array_merge($vars[$file] ?? [], $_vars);
         return $this->latte->renderToString($this->templateDir . '/' . $file, $tmplVars);
     }
@@ -62,6 +62,6 @@ class Latte {
     public function render(array $_vars = []): void
     {
         $html = $this->parse($this->layout, $_vars);
-        $this->response->write($html);
+        $this->response->html->write($html);
     }
 }

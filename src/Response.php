@@ -6,13 +6,24 @@ class Response {
 
     private string $status = "200 OK";
     private array $headers = [];
-    private string $body = "";
-    private array $templateVars = [];
-    private array $jsonData = [];
+
+    public Html $html;
+    public Json $json;
+
+    public function __construct()
+    {
+        $this->html = new Html();
+        $this->json = new Json();
+    }
 
     public function setStatus(int $code): void
     {
         $this->status = $this->mapStatusCode($code);
+    }
+
+    public function getHeader(string $header): string
+    {
+        return $this->headers[$header];
     }
 
     public function addHeader(string $name, mixed $value): void
@@ -20,24 +31,9 @@ class Response {
         $this->headers[$name] = $value;
     }
 
-    public function write(string $content): void
+    public function isParsable(): bool
     {
-        $this->body .= $content;
-    }
-
-    public function assignHTML(string $tmpl, string $var, string $html): void
-    {
-        $this->templateVars[$tmpl][$var] = $html;
-    }
-
-    public function getVars(): array
-    {
-        return $this->templateVars;
-    }
-
-    public function toJSON(string $var, array $data): void
-    {
-        $this->jsonData[$var] = $data;
+        return !$this->json->getData() && $this->html->getVars();
     }
 
     public function flush(): void
@@ -48,17 +44,13 @@ class Response {
             header("{$name}: {$value}");
         }
 
-        if ($this->jsonData) { # JSON
-            header('Content-Type: application/json');
-            print json_encode($this->jsonData);
+        if ($this->json->getData()) { # JSON
+            $this->json->flush();
         } else { # HTML
-            header('Content-Type: text/html');
-            print $this->body;
+            $this->html->flush();
         }
 
         $this->headers = [];
-        $this->body = "";
-        $this->jsonData = [];
     }
 
     private function mapStatusCode(int $code): string

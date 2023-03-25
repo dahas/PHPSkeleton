@@ -16,31 +16,31 @@ class App extends AppBase {
 
     public function execute(): void
     {
-        $template = new Latte($this->response);
-
-        $this->router->notFound(function (Request $request, Response $response) use ($template) {
+        $this->router->notFound(function (Request $request, Response $response) {
             $response->setStatus(404);
-            $template->assignTo(Latte::LAYOUT, [
-                'title' => '404 Not Found',
-                'content' => $template->parse('404.partial.html')
-            ]);
+            $response->json->assignData(["404" => "Not Found"]);
         });
 
         $this->router->run();
 
-        $nav = $template->parse('Nav.partial.html', [
-            "items" => [
-                "/" => "Home",
-                "/Arithmetic" => "Arithmetic",
-                "/Text/reverse?flip=elloH" => "Flip Text"
-            ]
-        ]);
+        if ($this->response->isParsable()) {
+            $template = new Latte($this->response);
 
-        $template->assignTo(Latte::LAYOUT, [
-            "nav" => $nav
-        ]);
+            $nav = $template->parse('Nav.partial.html', [
+                "items" => [
+                    "/" => "Home",
+                    "/Arithmetic" => "Arithmetic",
+                    "/Text/reverse?flip=elloH" => "Flip Text",
+                    "/qwert" => "No Controller"
+                ]
+            ]);
 
-        $template->render();
+            $template->assignTo(Latte::LAYOUT, [
+                "nav" => $nav
+            ]);
+
+            $template->render();
+        }
 
         $this->response->flush();
     }

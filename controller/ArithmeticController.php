@@ -38,7 +38,7 @@ class ArithmeticController
     {
         $data = $request->getData();
         $res = $this->germanDecimalNumberFormat($data["a"] + $data["b"]);  // <-- Method from the trait
-        $response->write(sprintf("Addition: %s + %s = %s", $data["a"], $data["b"], $res));
+        $response->json->assignData(["Addition" => sprintf("%s + %s = %s", $data["a"], $data["b"], $res)]);
     }
 
 
@@ -47,7 +47,7 @@ class ArithmeticController
     {
         $data = $request->getData();
         $res = $this->germanDecimalNumberFormat($data["a"] - $data["b"]);  // <-- Method from the trait
-        $response->write(sprintf("Subtraction: %s - %s = %s", $data["a"], $data["b"], $res));
+        $response->json->assignData(["Subtraction" => sprintf("%s - %s = %s", $data["a"], $data["b"], $res)]);
     }
 
 
@@ -56,6 +56,6 @@ class ArithmeticController
     {
         $data = $request->getData();
         $res = $this->germanDecimalNumberFormat($data["a"] * $data["b"]);  // <-- Method from the trait
-        $response->write(sprintf("Multiplication: %s * %s = %s", $data["a"], $data["b"], $res));
+        $response->json->assignData(["Multiplication" => sprintf("%s * %s = %s", $data["a"], $data["b"], $res)]);
     }
 }
