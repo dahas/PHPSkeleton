@@ -19,7 +19,7 @@ class LatteTest extends TestCase
         $_ENV['LAYOUT_TEMPLATE_NAME'] = "Layout.html";
 
         $this->response = new Response();
-        $this->template = new Latte($this->response, __DIR__ . '/files', __DIR__ . '/cache');
+        $this->template = new Latte(__DIR__ . '/files', __DIR__ . '/cache');
     }
  
     protected function tearDown() : void
@@ -30,7 +30,9 @@ class LatteTest extends TestCase
     
     public function testParse()
     {
-        $partial = $this->template->parse("Partial.html", [
+        $html = $this->template->parse("Partial.html", [
+            "title" => "John Rambo",
+            "text" => "Something escaped",
             "header" => "John Rambo",
             "var" => "Partial content",
             "list" => [
@@ -39,17 +41,6 @@ class LatteTest extends TestCase
                 "ccc" => "Gamma",
             ]
         ]);
-        
-        $this->template->assignTo(Latte::LAYOUT, [
-            "partial" => $partial
-        ]);
-
-        $this->template->render([
-            "title" => "John Rambo",
-            "text" => "Something escaped",
-        ]);
-
-        $html = $this->response->getBody();
 
         $this->assertStringEqualsFile(__DIR__ . "/files/result.html", $html);
     }

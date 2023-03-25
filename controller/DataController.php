@@ -1,10 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace PHPSkeleton\App;
+namespace PHPSkeleton\Controller;
 
 use PHPSkeleton\Sources\attributes\Route;
 use PHPSkeleton\Sources\ControllerBase;
 use PHPSkeleton\Sources\attributes\Inject;
+use PHPSkeleton\Sources\Request;
+use PHPSkeleton\Sources\Response;
 
 
 class DataController extends ControllerBase
@@ -23,13 +25,13 @@ class DataController extends ControllerBase
     }
 
     #[Route('/Data/load')]
-    public function loadServices() : array
+    public function loadServices(Request $request, Response $response) : array
     {
         $svcs = [];
         $svcs[] = $this->DataService->loadData();   // <-- Method from the injected service
         $svcs[] = $this->UserService->loadData();
 
-        print_r($svcs);
+        $response->write("<pre>" . serialize($svcs) . "</pre>");
         
         return $svcs;
     }

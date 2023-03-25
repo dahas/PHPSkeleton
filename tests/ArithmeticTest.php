@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-use PHPSkeleton\App\ArithmeticController;
 use PHPUnit\Framework\TestCase;
 use PHPSkeleton\Sources\Response;
 use PHPSkeleton\Sources\Request;
+use PHPSkeleton\Controller\ArithmeticController;
 
 class ArithmeticTest extends TestCase {
     
@@ -32,6 +32,6 @@ class ArithmeticTest extends TestCase {
             "b" => 5
         ]);
         $this->arithmetic->add($this->request, $this->response);
-        $this->assertEquals('Addition: 3 + 5 = 8,00', $this->response->getBody());
+        $this->assertEquals('{"message":"Success","data":{"0":[],"Addition":"3 + 5 = 8,00"},"count":2}', $this->response->read());
     }
 }

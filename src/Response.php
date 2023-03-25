@@ -7,16 +7,10 @@ class Response {
     private string $status = "200 OK";
     private array $headers = [];
     private string $body = "";
-    private array $templateVars = [];
 
-    public function setStatus(int $code): void
+    public function read(): string
     {
-        $this->status = $this->mapStatusCode($code);
-    }
-
-    public function addHeader(string $name, mixed $value): void
-    {
-        $this->headers[$name] = $value;
+        return $this->body;
     }
 
     public function write(string $content): void
@@ -24,14 +18,29 @@ class Response {
         $this->body .= $content;
     }
 
-    public function assign(string $file, string $var, string $html): void
+    public function setStatus(int $code): void
     {
-        $this->templateVars[$file][$var] = $html;
+        $this->status = $this->mapStatusCode($code);
     }
 
-    public function getVars(): array
+    public function getStatus(): string
     {
-        return $this->templateVars;
+        return $this->status;
+    }
+
+    public function getHeader(string $header): string
+    {
+        return $this->headers[$header];
+    }
+
+    public function addHeader(string $name, mixed $value): void
+    {
+        $this->headers[$name] = $value;
+    }
+
+    public function isParsable(): bool
+    {
+        return !empty($this->html->getVars());
     }
 
     public function flush(): void
@@ -42,15 +51,9 @@ class Response {
             header("{$name}: {$value}");
         }
 
-        print $this->body;
-
         $this->headers = [];
-        $this->body = "";
-    }
 
-    public function getBody(): string
-    {
-        return $this->body;
+        die($this->body);
     }
 
     private function mapStatusCode(int $code): string

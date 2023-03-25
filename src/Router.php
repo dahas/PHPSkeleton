@@ -27,10 +27,10 @@ class Router {
         } else {
             $handle = fopen($routesCacheFile, "w");
 
-            $files = array_diff(scandir(ROOT . "/app"), array('.', '..'));
+            $files = array_diff(scandir(ROOT . "/controller"), array('.', '..'));
 
             foreach ($files as $file) {
-                $controller = "PHPSkeleton\\App\\" . explode(".", $file)[0];
+                $controller = "PHPSkeleton\\Controller\\" . explode(".", $file)[0];
                 $reflectionController = new \ReflectionClass($controller);
 
                 foreach ($reflectionController->getMethods() as $method) {
@@ -73,7 +73,7 @@ class Router {
         ];
     }
 
-    public function notFound(callable $callback): void
+    public function notFound(callable|array $callback): void
     {
         $this->notFoundHandler = $callback;
     }

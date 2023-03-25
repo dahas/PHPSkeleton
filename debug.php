@@ -1,6 +1,6 @@
 <?php
 
-use PHPSkeleton\App\AppController;
+use PHPSkeleton\App\App;
 
 !defined('ROOT') && define('ROOT', __DIR__);
 
@@ -13,6 +13,7 @@ $dotenv->safeLoad();
 # Set Request Params:
 # -----------------------------------------
 // $_SERVER['REQUEST_URI'] = "/Text/reverse?flip=MeinerEiner";
+// $_SERVER['REQUEST_URI'] = "/Text/bold";
 // $_SERVER['REQUEST_URI'] = "/Data/load";
 // $_SERVER['REQUEST_URI'] = "/Arithmetic/multiply";
 // $_SERVER['REQUEST_URI'] = "/Arithmetic/add";
@@ -25,5 +26,5 @@ $_POST['flop'] = "Reverse";
 # -----------------------------------------
 
 
-$app = new AppController();
+$app = new App();
 $app->execute();
