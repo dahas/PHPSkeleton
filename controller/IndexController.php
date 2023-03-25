@@ -15,16 +15,26 @@ class IndexController extends ControllerBase {
     {
         $data = $request->getData();
 
-        $template = new Latte($response);
+        $template = new Latte();
+
+        $nav = $template->parse('Nav.partial.html', [
+            "items" => [
+                "/" => "Home",
+                "/Arithmetic" => "Arithmetic",
+                "/Text/reverse?flip=elloH" => "Flip Text",
+                "/qwert" => "No Controller"
+            ]
+        ]);
 
         $_vars = [
+            'navigation' => $nav,
+            'title' => 'Index Controller',
             'header' => 'Index',
             "var" => "Hello Index Controller!"
         ];
-        $content = $template->parse('Index.partial.html', $_vars);
-        $template->assignTo(Latte::LAYOUT, [
-            'title' => 'Index',
-            'content' => $content
-        ]);
+        $html = $template->parse('Index.partial.html', $_vars);
+        
+        $response->addHeader("Content-Type", "text/html");
+        $response->write($html);
     }
 }

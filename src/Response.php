@@ -6,19 +6,26 @@ class Response {
 
     private string $status = "200 OK";
     private array $headers = [];
+    private string $body = "";
 
-    public Html $html;
-    public Json $json;
-
-    public function __construct()
+    public function read(): string
     {
-        $this->html = new Html();
-        $this->json = new Json();
+        return $this->body;
+    }
+
+    public function write(string $content): void
+    {
+        $this->body .= $content;
     }
 
     public function setStatus(int $code): void
     {
         $this->status = $this->mapStatusCode($code);
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
     }
 
     public function getHeader(string $header): string
@@ -33,7 +40,7 @@ class Response {
 
     public function isParsable(): bool
     {
-        return !$this->json->getData() && $this->html->getVars();
+        return !empty($this->html->getVars());
     }
 
     public function flush(): void
@@ -44,13 +51,9 @@ class Response {
             header("{$name}: {$value}");
         }
 
-        if ($this->json->getData()) { # JSON
-            $this->json->flush();
-        } else { # HTML
-            $this->html->flush();
-        }
-
         $this->headers = [];
+
+        die($this->body);
     }
 
     private function mapStatusCode(int $code): string

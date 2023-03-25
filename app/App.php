@@ -4,6 +4,8 @@ namespace PHPSkeleton\App;
 
 use PHPSkeleton\Library\Latte;
 use PHPSkeleton\Sources\AppBase;
+use PHPSkeleton\Sources\HtmlAdapter;
+use PHPSkeleton\Sources\JsonAdapter;
 use PHPSkeleton\Sources\Request;
 use PHPSkeleton\Sources\Response;
 
@@ -18,29 +20,34 @@ class App extends AppBase {
     {
         $this->router->notFound(function (Request $request, Response $response) {
             $response->setStatus(404);
-            $response->json->assignData(["404" => "Not Found"]);
+            $adapter = new JsonAdapter();
+            $adapter->setMessage("Error! The requested resource doesn't exist!");
+            $json = $adapter->encode();
+
+            $response->addHeader("Content-Type", "application/json");
+            $response->write($json);
         });
 
         $this->router->run();
 
-        if ($this->response->isParsable()) {
-            $template = new Latte($this->response);
+        // $htmlAdapter = new HtmlAdapter($this->response);
 
-            $nav = $template->parse('Nav.partial.html', [
-                "items" => [
-                    "/" => "Home",
-                    "/Arithmetic" => "Arithmetic",
-                    "/Text/reverse?flip=elloH" => "Flip Text",
-                    "/qwert" => "No Controller"
-                ]
-            ]);
+        // $template = new Latte($htmlAdapter);
 
-            $template->assignTo(Latte::LAYOUT, [
-                "nav" => $nav
-            ]);
+        // $nav = $template->parse('Nav.partial.html', [
+        //     "items" => [
+        //         "/" => "Home",
+        //         "/Arithmetic" => "Arithmetic",
+        //         "/Text/reverse?flip=elloH" => "Flip Text",
+        //         "/qwert" => "No Controller"
+        //     ]
+        // ]);
 
-            $template->render();
-        }
+        // $template->assignTo(Latte::LAYOUT, [
+        //     "nav" => $nav
+        // ]);
+
+        // $template->render();
 
         $this->response->flush();
     }
