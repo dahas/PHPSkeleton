@@ -19,6 +19,6 @@ class UserService extends ServiceBase
     }
 
     public function loadData() {
-        return  "User data loaded!\n";
+        return  "User data loaded!";
     }
 }

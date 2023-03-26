@@ -32,6 +32,6 @@ class ArithmeticTest extends TestCase {
             "b" => 5
         ]);
         $this->arithmetic->add($this->request, $this->response);
-        $this->assertEquals('{"message":"Success","data":{"0":[],"Addition":"3 + 5 = 8,00"},"count":2}', $this->response->read());
+        $this->assertEquals('{"message":"Success","data":{"Addition":"3 + 5 = 8,00"},"count":1}', $this->response->read());
     }
 }

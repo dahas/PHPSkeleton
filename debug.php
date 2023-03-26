@@ -12,13 +12,13 @@ $dotenv->safeLoad();
 
 # Set Request Params:
 # -----------------------------------------
-// $_SERVER['REQUEST_URI'] = "/Text/reverse?flip=MeinerEiner";
+$_SERVER['REQUEST_URI'] = "/Text/reverse?flip=MeinerEiner";
 // $_SERVER['REQUEST_URI'] = "/Text/bold";
 // $_SERVER['REQUEST_URI'] = "/Data/load";
 // $_SERVER['REQUEST_URI'] = "/Arithmetic/multiply";
 // $_SERVER['REQUEST_URI'] = "/Arithmetic/add";
 // $_SERVER['REQUEST_URI'] = "/Arithmetic/subtract";
-$_SERVER['REQUEST_URI'] = "/";
+// $_SERVER['REQUEST_URI'] = "/";
 $_SERVER['REQUEST_METHOD'] = "GET";
 $_GET['a'] = 123;
 $_GET['b'] = 210;

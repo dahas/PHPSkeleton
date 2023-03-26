@@ -3,10 +3,14 @@
 namespace PHPSkeleton\Library;
 
 use Latte\Engine;
+use PHPSkeleton\Sources\Request;
+use PHPSkeleton\Sources\Response;
 
 class TemplateEngine {
 
     private Engine $latte;
+    private array $templateVars = [];
+    private string $html = "";
 
     public function __construct(
         private string $templateDir = ROOT . '/templates',
@@ -17,15 +21,26 @@ class TemplateEngine {
         $this->latte->setAutoRefresh($_ENV['MODE'] === 'dev');
     }
 
+    public function assign(array $_vars): void
+    {
+        $this->templateVars = array_merge($this->templateVars, $_vars);
+    }
+
     /**
      * Use this method to parse a template.
      * 
-     * @param string $file The name of a template file 
-     * @param array $_vars An associative array with template vars (optional)
+     * @param string $file The file to be parsed
+     * @param string|null $block A defined block within the template (optional)
      * @return string HTML
      */
-    public function parse(string $file, array $_vars = []): string
+    public function parse(string $file, string|null $block = null): void
     {
-        return $this->latte->renderToString($this->templateDir . '/' . $file, $_vars);
+        $this->html = $this->latte->renderToString($this->templateDir . '/' . $file, $this->templateVars, $block);
+    }
+    
+    public function render(Request $request, Response $response): void
+    {
+        $response->addHeader("Content-Type", "text/html");
+        $response->write($this->html);
     }
 }

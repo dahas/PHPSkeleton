@@ -2,7 +2,6 @@
 
 namespace PHPSkeleton\Controller;
 
-use PHPSkeleton\Library\Navigation;
 use PHPSkeleton\Library\TemplateEngine;
 use PHPSkeleton\Sources\attributes\Route;
 use PHPSkeleton\Library\JsonAdapter;
@@ -11,25 +10,20 @@ use PHPSkeleton\Sources\Response;
 use PHPSkeleton\Sources\traits\Utils;
 
 
-class ArithmeticController {
+class ArithmeticController extends AppController {
     
-    use Utils; // <-- Use methods of a trait
+    use Utils;
 
     #[Route(path: '/Arithmetic', method: 'get')]
     public function main(Request $request, Response $response): void
     {
-        $template = new TemplateEngine();
-
-        $_vars = [
-            "nav" => (new Navigation())->getItems(),
+        $this->template->assign([
             'title' => 'Arithmetic Controller',
             'header' => 'Arithmetic',
             "var" => "Hello Arithmetic Controller!"
-        ];
-        $html = $template->parse('Arithmetic.partial.html', $_vars);
-        
-        $response->addHeader("Content-Type", "text/html");
-        $response->write($html);
+        ]);
+        $this->template->parse('Arithmetic.partial.html');
+        $this->template->render($request, $response);
     }
 
 

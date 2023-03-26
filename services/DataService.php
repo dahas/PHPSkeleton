@@ -19,6 +19,6 @@ class DataService extends ServiceBase
     }
 
     public function loadData() {
-        return "Fields '$this->fields' from '$this->table' loaded! Ordered by '$this->key'\n";
+        return "Fields '$this->fields' from '$this->table' loaded! Ordered by '$this->key'";
     }
 }

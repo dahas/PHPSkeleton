@@ -2,37 +2,33 @@
 
 namespace PHPSkeleton\Controller;
 
+use PHPSkeleton\Library\JsonAdapter;
 use PHPSkeleton\Sources\attributes\Route;
-use PHPSkeleton\Sources\ControllerBase;
 use PHPSkeleton\Sources\attributes\Inject;
 use PHPSkeleton\Sources\Request;
 use PHPSkeleton\Sources\Response;
 
 
-class DataController extends ControllerBase
+class DataController extends AppController
 {
-    #[Inject('DataService')]  // <-- Inject dependency
+    #[Inject('DataService')]
     protected $DataService;
 
-
-    #[Inject('UserService')]  // <-- Inject dependency
+    #[Inject('UserService')] 
     protected $UserService;
 
-
-    public function __construct()
+    #[Route(path: '/Data/load', method: 'get')]
+    public function load(Request $request, Response $response) : void
     {
-        parent::__construct();
-    }
+        $svcs = [
+            'DataService' => $this->DataService->loadData(),
+            'UserService' => $this->UserService->loadData()
+        ];
 
-    #[Route('/Data/load')]
-    public function loadServices(Request $request, Response $response) : array
-    {
-        $svcs = [];
-        $svcs[] = $this->DataService->loadData();   // <-- Method from the injected service
-        $svcs[] = $this->UserService->loadData();
-
-        $response->write("<pre>" . serialize($svcs) . "</pre>");
-        
-        return $svcs;
+        $adapter = new JsonAdapter();
+        $adapter->setMessage("Success");
+        $adapter->setData($svcs);
+        $json = $adapter->encode();
+        $response->write($json);
     }
 }

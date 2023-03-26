@@ -14,7 +14,7 @@ class JsonAdapter {
 
     public function setData(array $data): void
     {
-        $this->data = [$this->data, ...$data];
+        $this->data = array_merge($this->data, $data);
     }
 
     public function getData(): array

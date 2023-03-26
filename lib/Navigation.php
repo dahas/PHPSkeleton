@@ -4,7 +4,7 @@ namespace PHPSkeleton\Library;
 
 class Navigation {
 
-    private array $items = [
+    private static array $items = [
         "/" => "Home",
         "/Arithmetic" => "Arithmetic",
         "/Text/reverse?flip=elloH" => "Flip Text",
@@ -12,13 +12,8 @@ class Navigation {
         "/qwert" => "No Controller"
     ];
 
-    public function setItems(array $items): void
+    public static function items(): array
     {
-        $this->items = $items;
-    }
-
-    public function getItems(): array
-    {
-        return $this->items;
+        return self::$items;
     }
 }
