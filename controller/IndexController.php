@@ -17,7 +17,6 @@ class IndexController extends AppController {
             "subtitle" => "Use this lightweight framework to quickly build rich web applications. If you are unfamiliar or inexperienced with developing secure and high-performance web applications, I strongly recommend using Symfony, Laravel, or a similar product."
         ]);
         $this->template->parse('Index.partial.html');
-        
         $this->template->render($request, $response);
     }
 }
