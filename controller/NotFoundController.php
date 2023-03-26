@@ -2,7 +2,7 @@
 
 namespace PHPSkeleton\Controller;
 
-use PHPSkeleton\Library\Latte;
+use PHPSkeleton\Library\TemplateEngine;
 use PHPSkeleton\Sources\Request;
 use PHPSkeleton\Sources\Response;
 
@@ -10,7 +10,7 @@ class NotFoundController {
 
     public function main(Request $request, Response $response): void
     {
-        $template = new Latte();
+        $template = new TemplateEngine();
 
         $_vars = [
             "nav" => [

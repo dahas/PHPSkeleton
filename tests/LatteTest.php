@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use PHPSkeleton\Library\Latte;
+use PHPSkeleton\Library\TemplateEngine;
 use PHPSkeleton\Sources\Response;
 
 !defined('ROOT') && define('ROOT', dirname(__DIR__, 1));
@@ -12,14 +12,14 @@ $dotenv->safeLoad();
 class LatteTest extends TestCase
 {
     private Response $response; 
-    private Latte $template; 
+    private TemplateEngine $template; 
  
     protected function setUp() : void
     {
         $_ENV['LAYOUT_TEMPLATE_NAME'] = "Layout.html";
 
         $this->response = new Response();
-        $this->template = new Latte(__DIR__ . '/files', __DIR__ . '/cache');
+        $this->template = new TemplateEngine(__DIR__ . '/files', __DIR__ . '/cache');
     }
  
     protected function tearDown() : void

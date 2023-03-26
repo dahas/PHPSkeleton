@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPSkeleton\Sources;
+namespace PHPSkeleton\Library;
 
 class JsonAdapter {
 

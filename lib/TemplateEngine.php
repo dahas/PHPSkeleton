@@ -4,7 +4,7 @@ namespace PHPSkeleton\Library;
 
 use Latte\Engine;
 
-class Latte {
+class TemplateEngine {
 
     private Engine $latte;
 
@@ -18,9 +18,9 @@ class Latte {
     }
 
     /**
-     * Use this method to parse a template. If no file name is given the main layout file is used.
+     * Use this method to parse a template.
      * 
-     * @param string $file The name of a template file (optional)
+     * @param string $file The name of a template file 
      * @param array $_vars An associative array with template vars (optional)
      * @return string HTML
      */

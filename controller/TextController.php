@@ -2,10 +2,11 @@
 
 namespace PHPSkeleton\Controller;
 
-use PHPSkeleton\Library\Latte;
+use PHPSkeleton\Library\Navigation;
+use PHPSkeleton\Library\TemplateEngine;
 use PHPSkeleton\Sources\attributes\Route;
 use PHPSkeleton\Sources\ControllerBase;
-use PHPSkeleton\Sources\JsonAdapter;
+use PHPSkeleton\Library\JsonAdapter;
 use PHPSkeleton\Sources\Request;
 use PHPSkeleton\Sources\Response;
 
@@ -14,16 +15,10 @@ class TextController extends ControllerBase {
     #[Route(path: '/Text/bold', method: 'get')]
     public function bold(Request $request, Response $response): void
     {
-        $template = new Latte();
+        $template = new TemplateEngine();
 
         $_vars = [
-            "nav" => [
-                "/" => "Home",
-                "/Arithmetic" => "Arithmetic",
-                "/Text/reverse?flip=elloH" => "Flip Text",
-                "/Data/load" => "Data",
-                "/qwert" => "No Controller"
-            ],
+            "nav" => (new Navigation())->getItems(),
             'title' => 'Text Controller',
             'header' => 'Text',
             "var" => "Hello Text Controller!"
