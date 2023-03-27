@@ -8,10 +8,14 @@ use PHPSkeleton\Sources\ControllerBase;
 
 class AppController extends ControllerBase {
 
+    /**
+     * Latte Template Wngine
+     */
     protected $template;
     
     public function __construct()
     {
+        // Inject Services
         parent::__construct();
         
         $this->template = new TemplateEngine();

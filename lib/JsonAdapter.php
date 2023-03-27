@@ -2,6 +2,9 @@
 
 namespace PHPSkeleton\Library;
 
+use PHPSkeleton\Sources\Request;
+use PHPSkeleton\Sources\Response;
+
 class JsonAdapter {
 
     private string $message = "";
@@ -22,12 +25,15 @@ class JsonAdapter {
         return $this->data;
     }
 
-    public function encode(): string
+    public function encode(Request $request, Response $response): void
     {
-        return json_encode([
+        $json = json_encode([
             "message" => $this->message,
             "data" => $this->data,
             "count" => count($this->data)
         ]);
+
+        $response->addHeader("Content-Type", "application/json");
+        $response->write($json);
     }
 }

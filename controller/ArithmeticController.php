@@ -2,7 +2,6 @@
 
 namespace PHPSkeleton\Controller;
 
-use PHPSkeleton\Library\TemplateEngine;
 use PHPSkeleton\Sources\attributes\Route;
 use PHPSkeleton\Library\JsonAdapter;
 use PHPSkeleton\Sources\Request;
@@ -35,8 +34,7 @@ class ArithmeticController extends AppController {
         $adapter = new JsonAdapter();
         $adapter->setMessage("Success");
         $adapter->setData(["Addition" => sprintf("%s + %s = %s", $data["a"], $data["b"], $res)]);
-        $json = $adapter->encode();
-        $response->write($json);
+        $adapter->encode($request, $response);
     }
 
 
@@ -48,8 +46,7 @@ class ArithmeticController extends AppController {
         $adapter = new JsonAdapter();
         $adapter->setMessage("Success");
         $adapter->setData(["Subtraction" => sprintf("%s - %s = %s", $data["a"], $data["b"], $res)]);
-        $json = $adapter->encode();
-        $response->write($json);
+        $adapter->encode($request, $response);
     }
 
 
@@ -61,7 +58,6 @@ class ArithmeticController extends AppController {
         $adapter = new JsonAdapter();
         $adapter->setMessage("Success");
         $adapter->setData(["Multiplication" => sprintf("%s * %s = %s", $data["a"], $data["b"], $res)]);
-        $json = $adapter->encode();
-        $response->write($json);
+        $adapter->encode($request, $response);
     }
 }

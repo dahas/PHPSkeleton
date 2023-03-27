@@ -28,7 +28,6 @@ class DataController extends AppController
         $adapter = new JsonAdapter();
         $adapter->setMessage("Success");
         $adapter->setData($svcs);
-        $json = $adapter->encode();
-        $response->write($json);
+        $adapter->encode($request, $response);
     }
 }
