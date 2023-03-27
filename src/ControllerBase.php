@@ -13,7 +13,7 @@ class ControllerBase implements ControllerInterface
     }
 
     /**
-     * Use of a ReflectionClass to inject a Service assigned to an Attribute.
+     * Use of a ReflectionClass to inject Services assigned to Attributes.
      * 
      * @param string $namespace 
      */
